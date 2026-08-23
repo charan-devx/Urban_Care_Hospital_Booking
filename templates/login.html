@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+            <span class="logo-plus">+</span>
+            <span>Padma Hospital</span>
+        </a>
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            <a href="/doctors">Doctors</a>
+
+            <a href="/doctors">Appointments</a>
+
+            <a href="/login" class="active">
+                Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="login-page">
+
+    <div class="login-container">
+
+
+        <div class="login-header">
+
+            <div class="login-icon">
+                +
+            </div>
+
+            <h1>
+                Welcome Back
+            </h1>
+
+            <p>
+                Login to manage your appointments
+            </p>
+
+        </div>
+
+
+        {% if error %}
+
+        <div class="login-error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form method="POST"
+              action="{{ url_for('login') }}"
+              class="login-form">
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit"
+                    class="login-btn">
+
+                Login
+
+            </button>
+
+
+        </form>
+
+
+        <div class="login-footer">
+
+            <p>
+                Don't have an account?
+                <a href="/register">
+                    Create Account
+                </a>
+            </p>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+
+</html>

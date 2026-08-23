@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Doctors - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="site-header">
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+
+            <span class="logo-icon">+</span>
+
+            <span class="logo-text">
+                Padma Hospital
+            </span>
+
+        </a>
+
+
+        <nav>
+
+    <a href="/">
+        Home
+    </a>
+
+    <a href="/doctors">
+        Doctors
+    </a>
+
+    <a href="{{ url_for('appointments') }}">
+        Appointments
+    </a>
+
+    <a href="/login">
+        Doctor Login
+    </a>
+
+</nav>
+
+    </div>
+
+</header>
+
+<main>
+
+    <section class="doctors-section">
+
+        <div class="container">
+
+            <h1>Our Doctors</h1>
+
+            <p class="section-description">
+                Find and book a consultation with our experienced doctors.
+            </p>
+
+
+            <div class="doctor-grid">
+
+                {% for doctor in doctors %}
+
+                <div class="doctor-card">
+
+
+                    <!-- Doctor Image -->
+
+                    <div class="doctor-image">
+
+                        <div class="doctor-avatar">
+                            {{ doctor.name[0] }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- Doctor Information -->
+
+                    <div class="doctor-info">
+
+                        <h2>
+                            {{ doctor.name }}
+                        </h2>
+
+
+                        <h3>
+                            {{ doctor.specialization }}
+                        </h3>
+
+
+                        <p>
+                            {{ doctor.qualification }}
+                        </p>
+
+
+                        <p>
+                            <strong>Experience:</strong>
+                            {{ doctor.experience }} years
+                        </p>
+
+
+                        <p>
+                            <strong>Consultation Fee:</strong>
+                            ₹{{ doctor.consultation_fee }}
+                        </p>
+
+
+                        <p class="doctor-bio">
+                            {{ doctor.bio }}
+                        </p>
+
+
+                        <!-- Buttons -->
+
+                        <div class="doctor-actions">
+
+                            <a
+                                href="{{ url_for('doctor_profile', doctor_id=doctor.id) }}"
+                                class="profile-btn">
+                                View Profile
+                            </a>
+
+
+                            <a
+                                href="{{ url_for('book_appointment', doctor_id=doctor.id) }}"
+                                class="book-btn">
+                                Book Now
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

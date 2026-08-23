@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Appointments - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+
+            <span class="logo-plus">+</span>
+
+            <span>Padma Hospital</span>
+
+        </a>
+
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments" class="active">
+                Appointments
+            </a>
+
+            <a href="/login">
+                Doctor Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= APPOINTMENTS PAGE ================= -->
+
+<main class="appointments-page">
+
+    <div class="appointments-container">
+
+
+        <!-- ================= PAGE HEADER ================= -->
+
+        <div class="appointments-header">
+
+            <div class="appointment-icon">
+                📅
+            </div>
+
+            <h1>
+                Check Your Appointments
+            </h1>
+
+            <p>
+                Enter the phone number used during booking
+                to view your appointments.
+            </p>
+
+        </div>
+
+
+        <!-- ================= SEARCH CARD ================= -->
+
+        <div class="appointment-search-card">
+
+            <form method="POST"
+                  action="{{ url_for('appointments') }}">
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        maxlength="15"
+                        value="{{ phone or '' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit"
+                        class="appointment-search-btn">
+
+                    Find Appointments
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ================= ERROR MESSAGE ================= -->
+
+        {% if error %}
+
+        <div class="appointment-error">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ================= APPOINTMENT RESULTS ================= -->
+
+        {% if appointments %}
+
+        <div class="appointments-results">
+
+            <h2>
+                Your Appointments
+            </h2>
+
+
+            {% for appointment in appointments %}
+
+            <div class="appointment-card">
+
+
+                <!-- Appointment header -->
+
+                <div class="appointment-card-header">
+
+                    <div>
+
+                        <span class="appointment-token-label">
+                            Appointment Token
+                        </span>
+
+                        <strong class="appointment-token">
+
+                            {{ appointment.token_number or
+                               "Not generated" }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    <span class="appointment-status
+                        {% if appointment.status == 'confirmed' %}
+                            status-confirmed
+                        {% elif appointment.status == 'completed' %}
+                            status-completed
+                        {% elif appointment.status == 'cancelled' %}
+                            status-cancelled
+                        {% elif appointment.status == 'rejected' %}
+                            status-rejected
+                        {% else %}
+                            status-pending
+                        {% endif %}
+                    ">
+
+                        {{ appointment.status|capitalize }}
+
+                    </span>
+
+                </div>
+
+
+                <!-- Appointment information -->
+
+                <div class="appointment-info">
+
+
+                    <!-- Patient -->
+
+                    <div class="appointment-info-item">
+
+                        <span>
+                            Patient
+                        </span>
+
+                        <strong>
+                            {{ appointment.patient_name or "N/A" }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Doctor -->
+
+                    <div class="appointment-info-item">
+
+                        <span>
+                            Doctor
+                        </span>
+
+                        <strong>
+                            {{ appointment.doctor_name }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Specialization -->
+
+                    <div class="appointment-info-item">
+
+                        <span>
+                            Specialization
+                        </span>
+
+                        <strong>
+                            {{ appointment.specialization }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Date -->
+
+                    <div class="appointment-info-item">
+
+                        <span>
+                            Date
+                        </span>
+
+                        <strong>
+                            {{ appointment.appointment_date }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Time -->
+
+                    <div class="appointment-info-item">
+
+                        <span>
+                            Time
+                        </span>
+
+                        <strong>
+                            {{ appointment.appointment_time }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Consultation -->
+
+                    <div class="appointment-info-item">
+
+                        <span>
+                            Consultation
+                        </span>
+
+                        <strong>
+                            {{ appointment.consultation_type }}
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- Reason -->
+
+                {% if appointment.reason %}
+
+                <div class="appointment-reason">
+
+                    <span>
+                        Reason
+                    </span>
+
+                    <p>
+                        {{ appointment.reason }}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ================= INFORMATION ================= -->
+
+        <div class="appointment-help">
+
+            <strong>
+                Don't remember your appointment token?
+            </strong>
+
+            <p>
+                No problem. Enter the phone number you used
+                while booking your appointment.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

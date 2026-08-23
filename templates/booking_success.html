@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Appointment Confirmed - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+
+            <span class="logo-plus">+</span>
+
+            <span>Padma Hospital</span>
+
+        </a>
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/login">
+                Doctor Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= SUCCESS PAGE ================= -->
+
+<main class="booking-success-page">
+
+    <div class="success-container">
+
+
+        <!-- Success Icon -->
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <!-- Heading -->
+
+        <h1>
+            Appointment Confirmed!
+        </h1>
+
+        <p class="success-message">
+
+            Your appointment has been successfully booked.
+
+        </p>
+
+
+
+        <!-- ================= TOKEN CARD ================= -->
+
+        <div class="token-card">
+
+            <p class="token-label">
+                Your Appointment Token
+            </p>
+
+            <div class="token-number">
+
+                {{ token_number }}
+
+            </div>
+
+            <p class="token-instruction">
+
+                Please save this token number.
+                You can use your phone number to check
+                your appointment later.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= APPOINTMENT DETAILS ================= -->
+
+        <div class="appointment-details-card">
+
+            <h2>
+                Appointment Details
+            </h2>
+
+
+            <div class="appointment-detail-row">
+
+                <span>
+                    Patient
+                </span>
+
+                <strong>
+                    {{ patient_name }}
+                </strong>
+
+            </div>
+
+
+            <div class="appointment-detail-row">
+
+                <span>
+                    Phone Number
+                </span>
+
+                <strong>
+                    {{ patient_phone }}
+                </strong>
+
+            </div>
+
+
+            <div class="appointment-detail-row">
+
+                <span>
+                    Doctor
+                </span>
+
+                <strong>
+                    {{ doctor.name }}
+                </strong>
+
+            </div>
+
+
+            <div class="appointment-detail-row">
+
+                <span>
+                    Specialization
+                </span>
+
+                <strong>
+                    {{ doctor.specialization }}
+                </strong>
+
+            </div>
+
+
+            <div class="appointment-detail-row">
+
+                <span>
+                    Date
+                </span>
+
+                <strong>
+                    {{ appointment_date }}
+                </strong>
+
+            </div>
+
+
+            <div class="appointment-detail-row">
+
+                <span>
+                    Time
+                </span>
+
+                <strong>
+                    {{ appointment_time }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= ACTIONS ================= -->
+
+        <div class="success-actions">
+
+            <a href="/appointments"
+               class="success-primary-btn">
+
+                Check My Appointments
+
+            </a>
+
+
+            <a href="/doctors"
+               class="success-secondary-btn">
+
+                Book Another Appointment
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

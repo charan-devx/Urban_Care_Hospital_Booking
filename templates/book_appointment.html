@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="site-header">
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+
+            <span class="logo-icon">+</span>
+
+            <span class="logo-text">
+                Padma Hospital
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/login">
+                Doctor Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="booking-page">
+
+    <div class="container">
+
+
+        <!-- ================= PAGE HEADING ================= -->
+
+        <div class="booking-heading">
+
+            <a href="{{ url_for('doctor_profile', doctor_id=doctor.id) }}"
+               class="back-link">
+
+                ← Back to Doctor Profile
+
+            </a>
+
+
+            <h1>
+                Book an Appointment
+            </h1>
+
+            <p>
+                Schedule your consultation with our specialist.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= BOOKING LAYOUT ================= -->
+
+        <div class="booking-layout">
+
+
+            <!-- ================= DOCTOR CARD ================= -->
+
+            <section class="doctor-summary">
+
+                <div class="doctor-summary-header">
+
+                    <div class="large-doctor-avatar">
+
+                        {{ doctor.name[0] }}
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="doctor-label">
+                            SPECIALIST
+                        </span>
+
+                        <h2>
+                            {{ doctor.name }}
+                        </h2>
+
+                        <p class="specialization">
+                            {{ doctor.specialization }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="doctor-details">
+
+                    <div class="detail-item">
+
+                        <span>
+                            Qualification
+                        </span>
+
+                        <strong>
+                            {{ doctor.qualification }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>
+                            Consultation Fee
+                        </span>
+
+                        <strong class="fee">
+                            ₹{{ doctor.consultation_fee }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Available days -->
+
+                {% if availability %}
+
+                <div class="availability-section">
+
+                    <h3>
+                        Available Days
+                    </h3>
+
+                    <p class="availability-description">
+                        Doctor's regular consultation hours
+                    </p>
+
+
+                    <div class="availability-list">
+
+                        {% for item in availability %}
+
+                        <div class="availability-row">
+
+                            <strong>
+                                {{ item.day_of_week }}
+                            </strong>
+
+                            <span>
+                                {{ item.start_display }}
+                                -
+                                {{ item.end_display }}
+                            </span>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+
+                <div class="secure-booking">
+
+                    <span>✓</span>
+
+                    <p>
+                        Your appointment information is secure
+                        and protected.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= BOOKING FORM ================= -->
+
+            <section class="booking-card">
+
+                <div class="booking-card-header">
+
+                    <h2>
+                        Appointment Details
+                    </h2>
+
+                    <p>
+                        Enter patient details and select your preferred date and time.
+                    </p>
+
+                </div>
+
+
+
+                <!-- ERROR -->
+
+                {% if error %}
+
+                <div class="booking-error">
+                    {{ error }}
+                </div>
+
+                {% endif %}
+
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('book_appointment', doctor_id=doctor.id) }}"
+                >
+
+
+                    <!-- ================= PATIENT DETAILS ================= -->
+
+                    <div class="form-section">
+
+                        <h3>
+                            Patient Information
+                        </h3>
+
+
+                        <!-- Patient Name -->
+
+                        <div class="form-group">
+
+                            <label for="patient_name">
+                                Patient Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="patient_name"
+                                name="patient_name"
+                                placeholder="Enter patient name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- Phone -->
+
+                        <div class="form-group">
+
+                            <label for="patient_phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="patient_phone"
+                                name="patient_phone"
+                                placeholder="Enter your phone number"
+                                maxlength="20"
+                                autocomplete="tel"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        
+
+                    
+
+
+
+                    <!-- ================= APPOINTMENT DETAILS ================= -->
+
+                    <div class="form-section">
+
+                        <h3>
+                            Appointment Information
+                        </h3>
+
+
+
+                        <!-- Date -->
+
+                        <div class="form-group">
+
+                            <label for="appointment_date">
+                                Appointment Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="appointment_date"
+                                name="appointment_date"
+                                required
+                            >
+
+                            <small>
+                                Select a date to see available times.
+                            </small>
+
+                        </div>
+
+
+
+                        <!-- Time -->
+
+                        <div class="form-group">
+
+                            <label for="appointment_time">
+                                Available Time
+                            </label>
+
+
+                            <select
+                                id="appointment_time"
+                                name="appointment_time"
+                                required
+                            >
+
+                                <option value="">
+                                    Select a date first
+                                </option>
+
+                            </select>
+
+
+                            <div
+                                id="slot-message"
+                                class="slot-message"
+                            ></div>
+
+                        </div>
+
+
+
+                        <!-- Consultation -->
+
+                        <div class="form-group">
+
+                            <label for="consultation_type">
+                                Consultation Type
+                            </label>
+
+
+                            <select
+                                id="consultation_type"
+                                name="consultation_type"
+                                required
+                            >
+
+                                <option value="">
+                                    Select consultation type
+                                </option>
+
+                                <option value="in-person">
+                                    In-person Consultation
+                                </option>
+
+                                <option value="online">
+                                    Online Consultation
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- Reason -->
+
+                        <div class="form-group">
+
+                            <label for="reason">
+                                Reason for Visit
+                            </label>
+
+                            <textarea
+                                id="reason"
+                                name="reason"
+                                rows="4"
+                                placeholder="Briefly describe the reason for your visit..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= SUBMIT ================= -->
+
+                    <button
+                        type="submit"
+                        class="confirm-booking-btn"
+                    >
+
+                        Confirm Appointment
+
+                    </button>
+
+
+                    <p class="form-note">
+
+                        By confirming this appointment,
+                        you agree to provide accurate information.
+
+                    </p>
+
+
+                </form>
+
+            </section>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- ================= AVAILABILITY JS ================= -->
+
+<script>
+
+const dateInput =
+    document.getElementById("appointment_date");
+
+const timeSelect =
+    document.getElementById("appointment_time");
+
+const slotMessage =
+    document.getElementById("slot-message");
+
+
+
+dateInput.addEventListener("change", function () {
+
+    const selectedDate = this.value;
+
+
+    timeSelect.innerHTML =
+        '<option value="">Loading available times...</option>';
+
+    slotMessage.textContent = "";
+
+
+    if (!selectedDate) {
+
+        timeSelect.innerHTML =
+            '<option value="">Select a date first</option>';
+
+        return;
+
+    }
+
+
+    fetch(
+        `/api/doctors/{{ doctor.id }}/availability?date=${selectedDate}`
+    )
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Unable to load availability");
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        timeSelect.innerHTML =
+            '<option value="">Select available time</option>';
+
+
+        if (
+            !data.available ||
+            !data.slots ||
+            data.slots.length === 0
+        ) {
+
+            timeSelect.innerHTML =
+                '<option value="">No available slots</option>';
+
+            slotMessage.textContent =
+                data.message ||
+                "No appointments available.";
+
+            return;
+
+        }
+
+
+        data.slots.forEach(slot => {
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                slot.value;
+
+
+            option.textContent =
+                slot.display;
+
+
+            timeSelect.appendChild(option);
+
+        });
+
+
+        slotMessage.textContent =
+            `${data.slots.length} time slots available`;
+
+    })
+
+
+    .catch(error => {
+
+        console.error(
+            "Availability error:",
+            error
+        );
+
+
+        timeSelect.innerHTML =
+            '<option value="">Unable to load times</option>';
+
+
+        slotMessage.textContent =
+            "Unable to load available times. Please try again.";
+
+    });
+
+});
+
+</script>
+
+
+</body>
+
+</html>

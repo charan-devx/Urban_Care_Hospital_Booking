@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Verify Appointment - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+
+            <span class="logo-plus">+</span>
+
+            <span>Padma Hospital</span>
+
+        </a>
+
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            <a href="/doctors">Doctors</a>
+
+            <a href="/doctor/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main class="verify-page">
+
+    <div class="container">
+
+
+        <a href="/doctor/dashboard"
+           class="back-doctors">
+
+            ← Back to Dashboard
+
+        </a>
+
+
+        <div class="verify-card">
+
+
+            <div class="verify-header">
+
+                <div class="verify-icon">
+                    ✓
+                </div>
+
+                <h1>
+                    Appointment Verification
+                </h1>
+
+                <p>
+                    Verify the patient's appointment before consultation.
+                </p>
+
+            </div>
+
+
+
+            <!-- TOKEN -->
+
+            <div class="verify-token">
+
+                <span>
+                    APPOINTMENT TOKEN
+                </span>
+
+                <strong>
+                    {{ appointment.token_number }}
+                </strong>
+
+            </div>
+
+
+
+            <!-- PATIENT -->
+
+            <div class="verify-details">
+
+                <h2>
+                    Patient Information
+                </h2>
+
+
+                <div class="verify-row">
+
+                    <span>
+                        Patient Name
+                    </span>
+
+                    <strong>
+                        {{ appointment.patient_name }}
+                    </strong>
+
+                </div>
+
+
+                <div class="verify-row">
+
+                    <span>
+                        Phone
+                    </span>
+
+                    <strong>
+                        {{ appointment.patient_phone }}
+                    </strong>
+
+                </div>
+
+
+                <div class="verify-row">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong>
+                        {{ appointment.patient_email }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APPOINTMENT -->
+
+            <div class="verify-details">
+
+                <h2>
+                    Appointment Details
+                </h2>
+
+
+                <div class="verify-row">
+
+                    <span>
+                        Date
+                    </span>
+
+                    <strong>
+                        {{ appointment.appointment_date }}
+                    </strong>
+
+                </div>
+
+
+                <div class="verify-row">
+
+                    <span>
+                        Time
+                    </span>
+
+                    <strong>
+                        {{ appointment.appointment_time }}
+                    </strong>
+
+                </div>
+
+
+                <div class="verify-row">
+
+                    <span>
+                        Consultation
+                    </span>
+
+                    <strong>
+                        {{ appointment.consultation_type }}
+                    </strong>
+
+                </div>
+
+
+                <div class="verify-row">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong class="verify-status">
+
+                        {{ appointment.status|capitalize }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            {% if appointment.reason %}
+
+            <div class="verify-reason">
+
+                <strong>
+                    Patient Reason
+                </strong>
+
+                <p>
+                    {{ appointment.reason }}
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- ACTION -->
+
+{% if appointment.status == "confirmed" %}
+
+<div class="verify-action">
+
+    <form
+        action="{{ url_for('complete_appointment', appointment_id=appointment.id) }}"
+        method="POST"
+    >
+
+        <button
+            type="submit"
+            class="verify-confirm-btn"
+        >
+
+            ✓ Complete Consultation
+
+        </button>
+
+    </form>
+
+</div>
+
+
+{% elif appointment.status == "completed" %}
+
+<div class="already-completed">
+
+    ✓ This appointment has already been completed.
+
+</div>
+
+
+{% else %}
+
+<div class="already-completed">
+
+    Appointment status:
+    {{ appointment.status|capitalize }}
+
+</div>
+
+{% endif %}
+</div>
+</div>
+</main>
+
+
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

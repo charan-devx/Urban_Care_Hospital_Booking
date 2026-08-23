@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Doctor Dashboard - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+
+            <span class="logo-plus">+</span>
+
+            <span>Padma Hospital</span>
+
+        </a>
+
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            <a href="/doctors">Doctors</a>
+
+            <a href="/doctor/dashboard" class="active">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<main class="doctor-dashboard">
+
+    <div class="container">
+
+
+        <!-- Heading -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <p class="dashboard-label">
+                    DOCTOR DASHBOARD
+                </p>
+
+                <h1>
+                    Welcome, Dr. {{ user_name }}
+                </h1>
+
+                <p>
+                    Manage your appointments and verify patient tokens.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= APPOINTMENTS ================= -->
+
+        <section class="appointments-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Appointments
+                    </h2>
+
+                    <p>
+                        View scheduled appointments and patient tokens.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            {% if appointments %}
+
+
+            <div class="doctor-appointments">
+
+
+                {% for appointment in appointments %}
+
+
+                <div class="doctor-appointment-card">
+
+
+                    <!-- Token -->
+
+                    <div class="appointment-token-box">
+
+                        <span>
+                            TOKEN
+                        </span>
+
+                        <strong>
+                            {{ appointment.token_number or "N/A" }}
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- Patient -->
+
+                    <div class="patient-info">
+
+                        <h3>
+                            {{ appointment.patient_name }}
+                        </h3>
+
+                        <p>
+                            📞 {{ appointment.patient_phone }}
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- Appointment -->
+
+                    <div class="appointment-info">
+
+                        <p>
+
+                            <strong>
+                                Date
+                            </strong>
+
+                            {{ appointment.appointment_date }}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Time
+                            </strong>
+
+                            {{ appointment.appointment_time }}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Type
+                            </strong>
+
+                            {{ appointment.consultation_type }}
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- Status -->
+
+                    <div class="appointment-status">
+
+                        <span class="status-badge status-{{ appointment.status }}">
+
+                            {{ appointment.status|capitalize }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Action -->
+
+                    <div class="appointment-action">
+
+                        {% if appointment.status == "confirmed" %}
+
+                        <a
+                            href="{{ url_for(
+                                'verify_appointment',
+                                appointment_id=appointment.id
+                            ) }}"
+                            class="verify-btn">
+
+                            Verify Token
+
+                        </a>
+
+                        {% elif appointment.status == "completed" %}
+
+                        <span class="completed-text">
+
+                            ✓ Completed
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="pending-text">
+
+                            {{ appointment.status|capitalize }}
+
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="no-appointments">
+
+                <div class="no-appointments-icon">
+                    📅
+                </div>
+
+                <h3>
+                    No appointments
+                </h3>
+
+                <p>
+                    You currently have no scheduled appointments.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

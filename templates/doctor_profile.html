@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ doctor.name }} - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+            <span class="logo-plus">+</span>
+            <span>Padma Hospital</span>
+        </a>
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            <a href="/doctors">Doctors</a>
+
+            <a href="/doctors">Appointments</a>
+
+            <a href="#">Login</a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= DOCTOR PROFILE ================= -->
+
+<main class="profile-page">
+
+    <div class="container">
+
+
+        <!-- Back to doctors -->
+
+        <a href="/doctors" class="back-doctors">
+            ← Back to Doctors
+        </a>
+
+
+        <!-- ================= DOCTOR MAIN CARD ================= -->
+
+        <section class="doctor-profile-card">
+
+
+            <!-- LEFT -->
+
+            <div class="profile-left">
+
+                <div class="large-doctor-avatar">
+                    {{ doctor.name[0] }}
+                </div>
+
+
+                <div class="profile-basic">
+
+                    <h1>
+                        {{ doctor.name }}
+                    </h1>
+
+                    <p class="profile-specialization">
+                        {{ doctor.specialization }}
+                    </p>
+
+                    <span class="available-badge">
+                        ● Available for Consultation
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="profile-details">
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Qualification
+                    </span>
+
+                    <strong>
+                        {{ doctor.qualification }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Experience
+                    </span>
+
+                    <strong>
+                        {{ doctor.experience }} years
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Consultation Fee
+                    </span>
+
+                    <strong class="fee">
+                        ₹{{ doctor.consultation_fee }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ABOUT + AVAILABILITY ================= -->
+
+        <div class="profile-two-column">
+
+
+            <!-- ABOUT DOCTOR -->
+
+            <section class="profile-section about-doctor">
+
+                <div class="section-heading">
+
+                    <span class="section-icon">
+                        👨‍⚕️
+                    </span>
+
+                    <h2>
+                        About Doctor
+                    </h2>
+
+                </div>
+
+
+                <p class="doctor-description">
+                    {{ doctor.bio }}
+                </p>
+
+            </section>
+
+
+            <!-- AVAILABILITY -->
+
+            <section class="profile-section availability-section">
+
+                <div class="section-heading">
+
+                    <span class="section-icon">
+                        📅
+                    </span>
+
+                    <h2>
+                        Doctor Availability
+                    </h2>
+
+                </div>
+
+
+                <div class="availability-list">
+
+                    {% for item in availability %}
+
+                    <div class="availability-row">
+
+                        <strong class="availability-day">
+                            {{ item.day_of_week }}
+                        </strong>
+
+                        <span>
+                            {{ item.start_display }}
+                            -
+                            {{ item.end_display }}
+                        </span>
+
+                    </div>
+
+                    {% else %}
+
+                    <p class="no-availability">
+                        No availability information available.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- ================= BOOKING ================= -->
+
+        <section class="booking-section">
+
+            <div class="booking-content">
+
+                <h2>
+                    Ready to book an appointment?
+                </h2>
+
+                <p>
+                    Choose a convenient time and book your consultation.
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('book_appointment', doctor_id=doctor.id) }}"
+               class="profile-book-btn">
+
+                Book Appointment →
+
+            </a>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Padma Hospital. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

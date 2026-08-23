@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Padma Hospital | Quality Healthcare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="site-header">
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+
+            <span class="logo-icon">+</span>
+
+            <span class="logo-text">
+                Padma Hospital
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="/">Home</a>
+
+            <a href="/doctors">Doctors</a>
+
+            <a href="/appointments">Appointments</a>
+
+            <a href="/login">Login</a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="container hero-content">
+
+
+        <div class="hero-text">
+
+            <span class="hero-badge">
+                🩺 Trusted Healthcare
+            </span>
+
+
+            <h1>
+                Your Health.
+                <span>Our Priority.</span>
+            </h1>
+
+
+            <p>
+
+                Quality healthcare from experienced doctors.
+                Find the right specialist and book your
+                consultation quickly and easily.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="/doctors"
+                   class="primary-btn">
+
+                    Find a Doctor
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="/doctors"
+                   class="secondary-btn">
+
+                    Book Appointment
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-features">
+
+                <div>
+
+                    <span class="feature-icon">
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Experienced Doctors
+                        </strong>
+
+                        <small>
+                            Qualified specialists
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <span class="feature-icon">
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Easy Booking
+                        </strong>
+
+                        <small>
+                            Simple appointment process
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Hero visual -->
+
+        <div class="hero-card">
+
+            <div class="hero-card-top">
+
+                <span class="online-dot"></span>
+
+                Available for consultation
+
+            </div>
+
+
+            <div class="hero-doctor-icon">
+                👨‍⚕️
+            </div>
+
+
+            <h3>
+                Professional Medical Care
+            </h3>
+
+
+            <p>
+                Connect with experienced doctors
+                across multiple specialties.
+            </p>
+
+
+            <a href="/doctors">
+                View Doctors →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats-section">
+
+    <div class="container stats-grid">
+
+
+        <div class="stat">
+
+            <strong>
+                5+
+            </strong>
+
+            <span>
+                Doctors
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                4+
+            </strong>
+
+            <span>
+                Specializations
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                24/7
+            </strong>
+
+            <span>
+                Patient Support
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                Easy
+            </strong>
+
+            <span>
+                Online Booking
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SERVICES ================= -->
+
+<section class="services-section">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <span>
+                OUR SERVICES
+            </span>
+
+            <h2>
+                Medical Specializations
+            </h2>
+
+            <p>
+                Consult experienced specialists across
+                multiple areas of healthcare.
+            </p>
+
+        </div>
+
+
+
+        <div class="service-grid">
+
+
+            <!-- Cardiology -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    ❤️
+                </div>
+
+                <h3>
+                    Cardiology
+                </h3>
+
+                <p>
+                    Heart and cardiovascular care from
+                    experienced specialists.
+                </p>
+
+                <a href="/doctors">
+                    Find a Doctor →
+                </a>
+
+            </div>
+
+
+
+            <!-- Dermatology -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🧴
+                </div>
+
+                <h3>
+                    Dermatology
+                </h3>
+
+                <p>
+                    Professional care for skin, hair
+                    and related conditions.
+                </p>
+
+                <a href="/doctors">
+                    Find a Doctor →
+                </a>
+
+            </div>
+
+
+
+            <!-- General Medicine -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🩺
+                </div>
+
+                <h3>
+                    General Medicine
+                </h3>
+
+                <p>
+                    Complete general healthcare and
+                    medical consultation.
+                </p>
+
+                <a href="/doctors">
+                    Find a Doctor →
+                </a>
+
+            </div>
+
+
+
+            <!-- Neurology -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    Neurology
+                </h3>
+
+                <p>
+                    Diagnosis and treatment of
+                    neurological conditions.
+                </p>
+
+                <a href="/doctors">
+                    Find a Doctor →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= WHY US ================= -->
+
+<section class="why-section">
+
+    <div class="container why-grid">
+
+
+        <div class="why-heading">
+
+            <span>
+                WHY PADMA HOSPITAL
+            </span>
+
+            <h2>
+                Healthcare You
+                Can Trust
+            </h2>
+
+            <p>
+                Everything you need for a simple,
+                reliable healthcare experience.
+            </p>
+
+        </div>
+
+
+
+        <div class="why-items">
+
+
+            <div class="why-item">
+
+                <div class="why-number">
+                    01
+                </div>
+
+                <div>
+
+                    <h3>
+                        Experienced Doctors
+                    </h3>
+
+                    <p>
+                        Connect with qualified doctors
+                        across multiple medical specialties.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="why-item">
+
+                <div class="why-number">
+                    02
+                </div>
+
+                <div>
+
+                    <h3>
+                        Simple Booking
+                    </h3>
+
+                    <p>
+                        Select your doctor, choose an
+                        available time and request an appointment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="why-item">
+
+                <div class="why-number">
+                    03
+                </div>
+
+                <div>
+
+                    <h3>
+                        Patient Focused
+                    </h3>
+
+                    <p>
+                        A clean and convenient experience
+                        designed around patient needs.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= HOURS ================= -->
+
+<section class="hours-section">
+
+    <div class="container">
+
+
+        <div class="hours-card">
+
+
+            <div class="hours-left">
+
+                <span>
+                    CONSULTATION HOURS
+                </span>
+
+                <h2>
+                    Plan Your Visit
+                </h2>
+
+                <p>
+                    Check our consultation hours before
+                    booking your appointment.
+                </p>
+
+            </div>
+
+
+            <div class="hours-right">
+
+
+                <div class="hours-row">
+
+                    <span>
+                        Monday – Friday
+                    </span>
+
+                    <strong>
+                        9:00 AM – 1:00 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="hours-row">
+
+                    <span>
+                        Afternoon
+                    </span>
+
+                    <strong>
+                        2:00 PM – 5:00 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="hours-row closed">
+
+                    <span>
+                        Saturday & Sunday
+                    </span>
+
+                    <strong>
+                        Holiday
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta-section">
+
+    <div class="container cta-content">
+
+        <span>
+            YOUR HEALTH MATTERS
+        </span>
+
+        <h2>
+            Ready to take care
+            of your health?
+        </h2>
+
+        <p>
+            Find the right doctor and book your
+            consultation today.
+        </p>
+
+
+        <a href="/doctors"
+           class="cta-button">
+
+            Find a Doctor
+            <span>→</span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <a href="/" class="logo footer-logo">
+
+                <span class="logo-icon">
+                    ✚
+                </span>
+
+                <span>
+                    Padma Hospital
+                </span>
+
+            </a>
+
+
+            <p>
+                Quality healthcare with
+                patient-focused service.
+            </p>
+
+        </div>
+
+
+
+        <div>
+
+            <h4>
+                Quick Links
+            </h4>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+        </div>
+
+
+
+        <div>
+
+            <h4>
+                Contact
+            </h4>
+
+            <p>
+                Padma Hospital
+            </p>
+            <p>
+               📍 12 hospital road,<br>
+                Hyderabad,Telangana
+
+            </p>
+            <p>
+                📞+91 9876543210
+            </p>
+
+            <p>
+                Quality healthcare for everyone.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Padma Hospital.
+            All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

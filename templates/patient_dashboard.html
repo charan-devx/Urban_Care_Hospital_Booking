@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Patient Dashboard - Padma Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="container nav">
+
+        <a href="/" class="hospital-logo">
+            <span class="logo-plus">+</span>
+            <span>Padma Hospital</span>
+        </a>
+
+        <nav>
+
+            <a href="/">Home</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/patient/dashboard">Dashboard</a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="profile-page">
+
+    <div class="container">
+
+        <h1>
+            Welcome, {{ user_name }}
+        </h1>
+
+        <p>
+            This is your patient dashboard.
+        </p>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>
