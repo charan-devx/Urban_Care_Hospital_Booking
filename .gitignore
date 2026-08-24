@@ -5,3 +5,5 @@ venv/
 .venv/
 tempCodeRunnerFile.py
 config.py
+.vscode/
+.idea/
