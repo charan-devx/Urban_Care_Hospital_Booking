@@ -1,12 +1,17 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from werkzeug.security import check_password_hash,generate_password_hash
 import mysql.connector
-from datetime import datetime, timedelta,time
+from datetime import datetime, timedelta
 import re
+import secrets
+import string
 
 app = Flask(__name__)
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app.secret_key = os.environ.get("SECRET_KEY", "change-this-secret-before-deployment")
 # =========================================================
@@ -93,25 +98,52 @@ def home():
 @app.route("/doctors")
 def doctors():
 
+    specialization = request.args.get("specialization")
+
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
-    query = """
-        SELECT
-            doctors.id,
-            users.name,
-            doctors.specialization,
-            doctors.qualification,
-            doctors.experience,
-            doctors.consultation_fee,
-            doctors.bio
-        FROM doctors
-        JOIN users
-            ON doctors.user_id = users.id
-        ORDER BY users.name
-    """
+    if specialization:
 
-    cursor.execute(query)
+        query = """
+            SELECT
+                doctors.id,
+                users.name,
+                doctors.specialization,
+                doctors.qualification,
+                doctors.experience,
+                doctors.consultation_fee,
+                doctors.bio
+            FROM doctors
+            JOIN users
+                ON doctors.user_id = users.id
+            WHERE doctors.specialization = %s
+            ORDER BY users.name
+        """
+
+        cursor.execute(
+            query,
+            (specialization,)
+        )
+
+    else:
+
+        query = """
+            SELECT
+                doctors.id,
+                users.name,
+                doctors.specialization,
+                doctors.qualification,
+                doctors.experience,
+                doctors.consultation_fee,
+                doctors.bio
+            FROM doctors
+            JOIN users
+                ON doctors.user_id = users.id
+            ORDER BY users.name
+        """
+
+        cursor.execute(query)
 
     doctors = cursor.fetchall()
 
@@ -120,9 +152,9 @@ def doctors():
 
     return render_template(
         "doctors.html",
-        doctors=doctors
+        doctors=doctors,
+        specialization=specialization
     )
-
 
 # =========================================================
 # DOCTOR PROFILE
@@ -603,7 +635,14 @@ def book_appointment(doctor_id):
         # GENERATE TOKEN
         # =================================================
 
-        token_number = f"PAD-{appointment_id:03d}"
+        characters = string.ascii_uppercase + string.digits
+
+        random_token = ''.join(
+            secrets.choice(characters)
+                for _ in range(6)
+        )
+
+        token_number = f"PAD-{random_token}"
 
 
         # =================================================
